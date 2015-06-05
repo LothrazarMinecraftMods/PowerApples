@@ -28,7 +28,7 @@ public class ModApples
 
 	@Instance(value = MODID)
 	public static ModApples instance;
-	@SidedProxy(clientSide="com.lothrazar.samscontent.proxy.ClientProxy", serverSide="com.lothrazar.samscontent.proxy.CommonProxy")
+	@SidedProxy(clientSide="com.lothrazar.samsapples.ClientProxy", serverSide="com.lothrazar.samsapples.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
 	//public static ConfigRegistry cfg;
