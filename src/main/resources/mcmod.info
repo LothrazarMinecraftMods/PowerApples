@@ -2,8 +2,8 @@
   "modListVersion": 2,
   "modList": [{
     "modid": "samsapples",
-    "name": "Sam's Apples",
-    "description": "Apples .",
+    "name": "Power Apples",
+    "description": "Diamond apples give increase your maximum health.  Emerald and Chocolate apples give haste and a few other bonuses.",
     "version": "1.8-1.0.0",
     "mcversion": "1.8",
     "url": "https://github.com/PrinceOfAmber/SamsPowerups/releases",
