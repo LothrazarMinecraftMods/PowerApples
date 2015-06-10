@@ -18,13 +18,13 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
   
-@Mod(modid = ModApples.MODID, version = ModApples.VERSION,	name = ModApples.NAME, useMetadata = true )  
+@Mod(modid = ModApples.MODID, useMetadata=true)  
 public class ModApples
 {
 	public static final String MODID = "samsapples";
 	public static final String TEXTURE_LOCATION = MODID + ":";
-	public static final String VERSION = "1.8-1.0.0";
-	public static final String NAME = "Sam's Apples";
+	//public static final String VERSION = "1.8-1.0.0";
+	//public static final String NAME = "Sam's Apples";, version = ModApples.VERSION,	name = ModApples.NAME, useMetadata = true 
 
 	@Instance(value = MODID)
 	public static ModApples instance;
