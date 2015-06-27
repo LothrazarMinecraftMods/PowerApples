@@ -4,7 +4,10 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
@@ -87,8 +90,15 @@ public class ModApples
 		if(event.entityLiving != null && event.entityLiving.isPotionActive(PotionRegistry.ender))
 		{
 			event.attackDamage = 0;  //starts at exactly  5.0 which is 2.5hearts
+
+			if(event.entityLiving.worldObj.isRemote == false)//do not spawn a second 'ghost' one on client side
+			{
+				EntityItem entityItem = new EntityItem(event.entityLiving.worldObj, event.targetX,event.targetY,event.targetZ, new ItemStack(Items.ender_pearl)); 
+				event.entityLiving.worldObj.spawnEntityInWorld(entityItem);
+			}
 		}
 	}
+ 
 	public static String lang(String name)
 	{
 		return StatCollector.translateToLocal(name);
