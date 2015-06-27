@@ -56,7 +56,6 @@ public class ItemRegistry
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_chocolate, new ItemStack(Items.dye, 1, dye_cocoa) );
 
 		ItemRegistry.apple_lapis = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false); 
-		//ItemRegistry.apple_lapis.addEffect(Potion.weakness.id, timePotionLong, I); 
 		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, timePotionLong, II); 
 		ItemRegistry.registerItem(ItemRegistry.apple_lapis, "apple_lapis");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_lapis, new ItemStack(Items.dye, 1, dye_lapis) );
@@ -66,7 +65,9 @@ public class ItemRegistry
 		ItemRegistry.apple_diamond.addEffect(Potion.resistance.id, timePotionLong, I); 
 		ItemRegistry.apple_diamond.addEffect(Potion.healthBoost.id, timePotionLong, V); 
 		ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, timePotionLong, I); 
-		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_diamond,new ItemStack(Items.diamond));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_diamond)
+			, new ItemStack(Items.diamond)
+			, new ItemStack(Items.apple));
 		
 		//TODO: something with digSlowdown (mining fatigue) as tradeoff for..?
  
