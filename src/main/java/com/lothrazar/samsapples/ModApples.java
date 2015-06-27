@@ -1,7 +1,8 @@
 package com.lothrazar.samsapples;
 
-import org.apache.logging.log4j.Logger;    
+import java.util.Random;
 
+import org.apache.logging.log4j.Logger;  
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.Tessellator;
@@ -19,6 +20,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -121,7 +123,7 @@ public class ModApples
 	@SubscribeEvent
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
 	{
-		//World world = Minecraft.getMinecraft().getIntegratedServer().getEntityWorld();
+		World world = Minecraft.getMinecraft().getIntegratedServer().getEntityWorld();
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer; 
  
 		if(player.isPotionActive(PotionRegistry.nav_id) && 
@@ -133,11 +135,34 @@ public class ModApples
 			int xRight = Minecraft.getMinecraft().displayWidth/2 - size*2;
 			int yBottom = Minecraft.getMinecraft().displayHeight/2 - size*2;
 
-			renderItemAt(new ItemStack(Items.clock),xLeft,yBottom,size);//works at mid left
-			renderItemAt(new ItemStack(Items.compass),xRight,yBottom,size);//works at mid top//was ,16
+			renderItemAt(new ItemStack(Items.clock),xLeft,yBottom,size);
+			renderItemAt(new ItemStack(Items.compass),xRight,yBottom,size);
+			
+			if(isSlimeChunk(world,player.getPosition()))
+			{
+				renderItemAt(new ItemStack(Items.slime_ball),xLeft + size+1,yBottom,size);
+			}
 		}
 	}
-	
+	private boolean isSlimeChunk(World world, BlockPos pos)
+	{
+		long seed =  world.getSeed();
+    
+		
+		
+		Chunk in = world.getChunkFromBlockCoords(pos);
+
+		//formula source : http://minecraft.gamepedia.com/Slime
+		Random rnd = new Random(seed +
+		        (long) (in.xPosition * in.xPosition * 0x4c1906) +
+		        (long) (in.xPosition * 0x5ac0db) + 
+		        (long) (in.zPosition * in.zPosition) * 0x4307a7L +
+		        (long) (in.zPosition * 0x5f24f) ^ 0x3ad8025f);
+		
+		boolean isSlimeChunk = (rnd.nextInt(10) == 0);
+    
+		return isSlimeChunk;
+	}
 	private static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
 		@SuppressWarnings("deprecation")
