@@ -24,7 +24,7 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_emerald;
 	public static ItemFoodAppleMagic apple_diamond; 
 	public static ItemFoodAppleMagic apple_ender; 
-	public static ItemFoodAppleMagic apple_frost; 
+	public static ItemFoodAppleMagic apple_bone; 
 	public static ItemFoodAppleMagic apple_lapis; 
 	public static ItemFoodAppleMagic apple_chocolate;
 	public static ItemFoodAppleMagic apple_netherwart; 
@@ -35,7 +35,7 @@ public class ItemRegistry
 
 	public static void registerItems()
 	{   
-		//TODO: config file for each item
+		//TODO: config file for each item??
 		ItemRegistry.apple_ender = new ItemFoodAppleMagic(hunger, false);
 		ItemRegistry.apple_ender.addEffect(PotionRegistry.ender.id, time, I);
 		ItemRegistry.registerItem(ItemRegistry.apple_ender, "apple_ender");
@@ -56,7 +56,7 @@ public class ItemRegistry
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_chocolate, new ItemStack(Items.dye, 1, dye_cocoa) );
 
 		ItemRegistry.apple_lapis = new ItemFoodAppleMagic(hunger, false); 
-		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, time, II); 
+		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, time, II); //Haste
 		ItemRegistry.registerItem(ItemRegistry.apple_lapis, "apple_lapis");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_lapis, new ItemStack(Items.dye, 1, dye_lapis) );
 		
@@ -70,18 +70,16 @@ public class ItemRegistry
 			, new ItemStack(Items.apple));
 		GameRegistry.addSmelting(apple_diamond, new ItemStack(Items.diamond, 1),	0);
 
-		apple_frost = new ItemFoodAppleMagic(hunger, false);
-		ItemRegistry.registerItem(ItemRegistry.apple_frost, "apple_frost");
-		ItemRegistry.apple_frost.addEffect(PotionRegistry.nav.id, time, I); 
-		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_frost,new ItemStack(Items.bone));
+		apple_bone = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.registerItem(ItemRegistry.apple_bone, "apple_bone");
+		ItemRegistry.apple_bone.addEffect(PotionRegistry.nav.id, time, I); 
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_bone,new ItemStack(Items.bone));
 		
 		apple_netherwart = new ItemFoodAppleMagic(hunger, false);
 		ItemRegistry.registerItem(ItemRegistry.apple_netherwart, "apple_netherwart");
-		ItemRegistry.apple_netherwart.addEffect(Potion.digSlowdown.id, time, I); 
+		ItemRegistry.apple_netherwart.addEffect(Potion.digSlowdown.id, time, I); //Mining Fatigue
 		ItemRegistry.apple_netherwart.addEffect(Potion.waterBreathing.id, time, I);  
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_netherwart,new ItemStack(Items.nether_wart));
-		
-		//TODO: cant think of anything for the purple apple...
 	}
 	
 	public static void registerItem(Item item, String name)

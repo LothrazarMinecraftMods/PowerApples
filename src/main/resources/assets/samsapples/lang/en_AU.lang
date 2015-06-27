@@ -1,7 +1,7 @@
 itemGroup.tabSamsApples=Magic Apples
-item.apple_frost.name=Frost Apple
+item.apple_bone.name=Bone Apple
 item.apple_emerald.name=Emerald Apple
-item.apple_nether_star.name=Nether Apple
+item.apple_netherwart.name=Nether Apple
 item.apple_ender.name=Ender Apple
 item.apple_diamond.name=Diamond Apple
 item.apple_lapis.name=Lapis Apple

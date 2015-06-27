@@ -38,17 +38,13 @@ public class ModApples
 {
 	public static final String MODID = "samsapples";
 	public static final String TEXTURE_LOCATION = MODID + ":";
-	//public static final String VERSION = "1.8-1.0.0";
-	//public static final String NAME = "Sam's Apples";, version = ModApples.VERSION,	name = ModApples.NAME, useMetadata = true 
 
 	@Instance(value = MODID)
 	public static ModApples instance;
 	@SidedProxy(clientSide="com.lothrazar.samsapples.ClientProxy", serverSide="com.lothrazar.samsapples.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
-	//public static ConfigRegistry cfg;
-	//public static SimpleNetworkWrapper network; 
-	//public static AchievementRegistry achievements;  
+
 	public static CreativeTabs tabSamsContent = new CreativeTabs("tabSamsApples") 
 	{ 
 		@Override
