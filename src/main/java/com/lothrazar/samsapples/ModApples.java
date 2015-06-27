@@ -10,6 +10,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
   
 @Mod(modid = ModApples.MODID, useMetadata=true)  
 public class ModApples
@@ -71,14 +73,22 @@ public class ModApples
     	//network.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, MessageKeyPressed.ID, Side.SERVER);
     	//network.registerMessage(MessagePotion.class, MessagePotion.class, MessagePotion.ID, Side.CLIENT);
  	
+
+		PotionRegistry.registerPotionEffects();
 		ItemRegistry.registerItems();
-		
  
   	    FMLCommonHandler.instance().bus().register(instance); 
   	    MinecraftForge.EVENT_BUS.register(instance); 
   	   
 	}
-	
+	@SubscribeEvent
+	public void onEnderTeleportEvent(EnderTeleportEvent event)
+	{  
+		if(event.entityLiving != null && event.entityLiving.isPotionActive(PotionRegistry.ender))
+		{
+			event.attackDamage = 0;  //starts at exactly  5.0 which is 2.5hearts
+		}
+	}
 	public static String lang(String name)
 	{
 		return StatCollector.translateToLocal(name);

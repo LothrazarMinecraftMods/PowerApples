@@ -33,9 +33,12 @@ public class ItemRegistry
 
 	public static void registerItems()
 	{   
-	  
-			//potion effects
-		 
+		ItemRegistry.apple_ender = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
+		ItemRegistry.apple_ender.addEffect(PotionRegistry.ender.id, timePotionLong, I);
+		ItemRegistry.registerItem(ItemRegistry.apple_ender, "apple_ender");
+
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_ender,new ItemStack(Items.ender_eye));
+	 
 		ItemRegistry.apple_emerald = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
 		ItemRegistry.apple_emerald.addEffect(Potion.digSpeed.id, timePotionLong, II);
 		ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, timePotionLong, I);  
@@ -61,6 +64,14 @@ public class ItemRegistry
 		ItemRegistry.registerItem(ItemRegistry.apple_diamond, "apple_diamond");
 		ItemFoodAppleHeart.addRecipe(ItemRegistry.apple_diamond);
 
+		//TODO:remove diamond apple or at least make it to resistance isntaed of hearts
+		//hearts are buggy with nether portals//save quit.
+		
+		
+		//TODO: ender apple back in since spells were removed
+		//1- on use , refund
+		//2- no damage
+		
 	 
  
 	}
