@@ -78,7 +78,7 @@ public class ItemRegistry
 		
 		apple_netherwart = new ItemFoodAppleMagic(hunger, false);
 		ItemRegistry.registerItem(ItemRegistry.apple_netherwart, "apple_netherwart");
-		//ItemRegistry.apple_netherwart.addEffect(Potion.digSlowdown.id, time, I); 
+		ItemRegistry.apple_netherwart.addEffect(PotionRegistry.nav.id, time, I); 
 		//ItemRegistry.apple_netherwart.addEffect(Potion.waterBreathing.id, time, I);  
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_netherwart,new ItemStack(Items.nether_wart));
 		

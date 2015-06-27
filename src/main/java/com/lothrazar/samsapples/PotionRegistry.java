@@ -19,13 +19,14 @@ public class PotionRegistry
 { 
 	//public static Potion tired;//http://www.minecraftforge.net/wiki/Potion_Tutorial
 	public static Potion ender;
-	
+	public static Potion nav;
 	public final static int I = 0; 
 	public final static int II = 1;
 	public final static int III = 2;
 	public final static int IV = 3;
 	public final static int V = 4;
-	
+	public static int ender_id = 50;
+	public static int nav_id = 51;
 	public static void registerPotionEffects()
 	{ 
 		initPotionTypesReflection();
@@ -37,8 +38,10 @@ public class PotionRegistry
 	{  
 		//http://www.minecraftforge.net/forum/index.php?topic=11024.0
 		//???http://www.minecraftforge.net/forum/index.php?topic=12358.0
+		//
+		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
+		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
 		
-		PotionRegistry.ender = (new PotionCustom(49, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
 	}
 
 	private static void initPotionTypesReflection() 
