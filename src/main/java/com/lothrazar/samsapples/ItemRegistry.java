@@ -20,15 +20,17 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_emerald;
 	public static ItemFoodAppleMagic apple_diamond; 
 	public static ItemFoodAppleMagic apple_ender; 
-	public static ItemFoodAppleMagic apple_frost; 
+	//public static ItemFoodAppleMagic apple_frost; 
+	public static ItemFoodAppleMagic apple_lapis; 
  
 	public static ItemFoodAppleMagic apple_chocolate;
-	public static ItemFoodAppleMagic apple_netherwart; 
+	//public static ItemFoodAppleMagic apple_netherwart; 
   
 	//public static int timePotionShort = 90; // 1:30
 	public static int timePotionLong = 8 * 60;// 8:00
 
 	public static final int dye_cocoa = 3;
+	public static final int dye_lapis = 4;
 
 	public static void registerItems()
 	{   
@@ -40,7 +42,7 @@ public class ItemRegistry
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_ender,new ItemStack(Items.ender_eye));
 	 
 		ItemRegistry.apple_emerald = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
-		ItemRegistry.apple_emerald.addEffect(Potion.digSpeed.id, timePotionLong, II);
+		//ItemRegistry.apple_emerald.addEffect(Potion.digSpeed.id, timePotionLong, II);
 		ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, timePotionLong, II);  
 		ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, timePotionLong, I);  
 		ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, timePotionLong, I); 
@@ -49,17 +51,24 @@ public class ItemRegistry
 
 		ItemRegistry.apple_chocolate = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false); 
 		ItemRegistry.apple_chocolate.addEffect(Potion.weakness.id, timePotionLong, I);
-		ItemRegistry.apple_chocolate.addEffect(Potion.moveSpeed.id, timePotionLong, I);
-		ItemRegistry.apple_chocolate.addEffect(Potion.digSpeed.id, timePotionLong, I); 
+		ItemRegistry.apple_chocolate.addEffect(Potion.moveSpeed.id, timePotionLong, I); 
 		ItemRegistry.registerItem(ItemRegistry.apple_chocolate, "apple_chocolate");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_chocolate, new ItemStack(Items.dye, 1, dye_cocoa) );
-	
+
+		ItemRegistry.apple_lapis = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false); 
+		//ItemRegistry.apple_lapis.addEffect(Potion.weakness.id, timePotionLong, I); 
+		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, timePotionLong, II); 
+		ItemRegistry.registerItem(ItemRegistry.apple_lapis, "apple_lapis");
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_lapis, new ItemStack(Items.dye, 1, dye_lapis) );
+		
 		ItemRegistry.apple_diamond = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false);
 		ItemRegistry.registerItem(ItemRegistry.apple_diamond, "apple_diamond");
-		ItemRegistry.apple_emerald.addEffect(Potion.resistance.id, timePotionLong, I); 
-		ItemRegistry.apple_emerald.addEffect(Potion.healthBoost.id, timePotionLong, V); 
-		ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, timePotionLong, I); 
+		ItemRegistry.apple_diamond.addEffect(Potion.resistance.id, timePotionLong, I); 
+		ItemRegistry.apple_diamond.addEffect(Potion.healthBoost.id, timePotionLong, V); 
+		ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, timePotionLong, I); 
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_diamond,new ItemStack(Items.diamond));
+		
+		//TODO: something with digSlowdown (mining fatigue) as tradeoff for..?
  
 	}
 	
