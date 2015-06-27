@@ -22,6 +22,7 @@ public class ItemFoodAppleMagic extends ItemFood
 	private ArrayList<Integer> potionIds;
 	private ArrayList<Integer> potionDurations;
 	private ArrayList<Integer> potionAmplifiers;
+
 	
 	public ItemFoodAppleMagic(int fillsHunger,boolean has_effect)
 	{  
@@ -73,11 +74,6 @@ public class ItemFoodAppleMagic extends ItemFood
 			 return EnumRarity.RARE;
 	} 
 	 
-
-
-	public static int hungerSmall = 1;
-	public static int hungerLarge = 4; //how much it fills us up
-   
 	public static void addRecipe(ItemFoodAppleMagic apple, ItemStack ingredient) 
 	{
 		GameRegistry.addRecipe(new ItemStack(apple)

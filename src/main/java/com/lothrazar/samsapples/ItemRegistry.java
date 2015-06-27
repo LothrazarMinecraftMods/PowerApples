@@ -16,18 +16,19 @@ public class ItemRegistry
 	public final static int III = 2;
 	public final static int IV = 3;
 	public final static int V = 4;
+
+	public static int hunger = 4; 
+	public static int time = 8 * 60;// 8:00
+   
 	 
 	public static ItemFoodAppleMagic apple_emerald;
 	public static ItemFoodAppleMagic apple_diamond; 
 	public static ItemFoodAppleMagic apple_ender; 
-	//public static ItemFoodAppleMagic apple_frost; 
+	public static ItemFoodAppleMagic apple_frost; 
 	public static ItemFoodAppleMagic apple_lapis; 
- 
 	public static ItemFoodAppleMagic apple_chocolate;
 	//public static ItemFoodAppleMagic apple_netherwart; 
   
-	//public static int timePotionShort = 90; // 1:30
-	public static int timePotionLong = 8 * 60;// 8:00
 
 	public static final int dye_cocoa = 3;
 	public static final int dye_lapis = 4;
@@ -35,42 +36,48 @@ public class ItemRegistry
 	public static void registerItems()
 	{   
 		//TODO: config file for each item
-		ItemRegistry.apple_ender = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
-		ItemRegistry.apple_ender.addEffect(PotionRegistry.ender.id, timePotionLong, I);
+		ItemRegistry.apple_ender = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.apple_ender.addEffect(PotionRegistry.ender.id, time, I);
 		ItemRegistry.registerItem(ItemRegistry.apple_ender, "apple_ender");
 
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_ender,new ItemStack(Items.ender_pearl));
 	 
-		ItemRegistry.apple_emerald = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
-		ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, timePotionLong, II);  
-		ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, timePotionLong, I);  
-		ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, timePotionLong, I); 
+		ItemRegistry.apple_emerald = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, time, II);  
+		ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, time, I);  
+		ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, time, I); 
 		ItemRegistry.registerItem(ItemRegistry.apple_emerald, "apple_emerald");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_emerald,new ItemStack(Items.emerald));
 
-		ItemRegistry.apple_chocolate = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false); 
-		ItemRegistry.apple_chocolate.addEffect(Potion.weakness.id, timePotionLong, I);
-		ItemRegistry.apple_chocolate.addEffect(Potion.moveSpeed.id, timePotionLong, I); 
+		ItemRegistry.apple_chocolate = new ItemFoodAppleMagic(hunger, false); 
+		ItemRegistry.apple_chocolate.addEffect(Potion.weakness.id, time, I);
+		ItemRegistry.apple_chocolate.addEffect(Potion.moveSpeed.id, time, I); 
 		ItemRegistry.registerItem(ItemRegistry.apple_chocolate, "apple_chocolate");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_chocolate, new ItemStack(Items.dye, 1, dye_cocoa) );
 
-		ItemRegistry.apple_lapis = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false); 
-		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, timePotionLong, II); 
+		ItemRegistry.apple_lapis = new ItemFoodAppleMagic(hunger, false); 
+		ItemRegistry.apple_lapis.addEffect(Potion.digSpeed.id, time, II); 
 		ItemRegistry.registerItem(ItemRegistry.apple_lapis, "apple_lapis");
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_lapis, new ItemStack(Items.dye, 1, dye_lapis) );
 		
-		ItemRegistry.apple_diamond = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerSmall, false);
+		ItemRegistry.apple_diamond = new ItemFoodAppleMagic(hunger, false);
 		ItemRegistry.registerItem(ItemRegistry.apple_diamond, "apple_diamond");
-		ItemRegistry.apple_diamond.addEffect(Potion.resistance.id, timePotionLong, I); 
-		ItemRegistry.apple_diamond.addEffect(Potion.healthBoost.id, timePotionLong, V); 
-		ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, timePotionLong, I); 
+		ItemRegistry.apple_diamond.addEffect(Potion.resistance.id, time, I); 
+		ItemRegistry.apple_diamond.addEffect(Potion.healthBoost.id, time, V); 
+		ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, time, I); 
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_diamond)
 			, new ItemStack(Items.diamond)
 			, new ItemStack(Items.apple));
 		GameRegistry.addSmelting(apple_diamond, new ItemStack(Items.diamond, 1),	0);
 
-		//TODO: something with digSlowdown (mining fatigue) as tradeoff for..?
- 
+		apple_frost = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.registerItem(ItemRegistry.apple_frost, "apple_frost");
+		ItemRegistry.apple_frost.addEffect(Potion.digSlowdown.id, time, I); 
+		ItemRegistry.apple_frost.addEffect(Potion.waterBreathing.id, time, I); 
+		//ItemRegistry.apple_frost.addEffect(Potion.confusion.id, 15, I); //few seconds, so its not gross
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_frost,new ItemStack(Items.bone));
+		
+		//TODO: cant think of anything for the purple apple...
 	}
 	
 	public static void registerItem(Item item, String name)
