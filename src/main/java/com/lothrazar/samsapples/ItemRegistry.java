@@ -27,7 +27,7 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_frost; 
 	public static ItemFoodAppleMagic apple_lapis; 
 	public static ItemFoodAppleMagic apple_chocolate;
-	//public static ItemFoodAppleMagic apple_netherwart; 
+	public static ItemFoodAppleMagic apple_netherwart; 
   
 
 	public static final int dye_cocoa = 3;
@@ -73,9 +73,14 @@ public class ItemRegistry
 		apple_frost = new ItemFoodAppleMagic(hunger, false);
 		ItemRegistry.registerItem(ItemRegistry.apple_frost, "apple_frost");
 		ItemRegistry.apple_frost.addEffect(Potion.digSlowdown.id, time, I); 
-		ItemRegistry.apple_frost.addEffect(Potion.waterBreathing.id, time, I); 
-		//ItemRegistry.apple_frost.addEffect(Potion.confusion.id, 15, I); //few seconds, so its not gross
+		ItemRegistry.apple_frost.addEffect(Potion.waterBreathing.id, time, I);  
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_frost,new ItemStack(Items.bone));
+		
+		apple_netherwart = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.registerItem(ItemRegistry.apple_netherwart, "apple_netherwart");
+		//ItemRegistry.apple_netherwart.addEffect(Potion.digSlowdown.id, time, I); 
+		//ItemRegistry.apple_netherwart.addEffect(Potion.waterBreathing.id, time, I);  
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_netherwart,new ItemStack(Items.nether_wart));
 		
 		//TODO: cant think of anything for the purple apple...
 	}
