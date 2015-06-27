@@ -39,10 +39,9 @@ public class ItemRegistry
 		ItemRegistry.apple_ender.addEffect(PotionRegistry.ender.id, timePotionLong, I);
 		ItemRegistry.registerItem(ItemRegistry.apple_ender, "apple_ender");
 
-		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_ender,new ItemStack(Items.ender_eye));
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_ender,new ItemStack(Items.ender_pearl));
 	 
 		ItemRegistry.apple_emerald = new ItemFoodAppleMagic(ItemFoodAppleMagic.hungerLarge, false);
-		//ItemRegistry.apple_emerald.addEffect(Potion.digSpeed.id, timePotionLong, II);
 		ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, timePotionLong, II);  
 		ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, timePotionLong, I);  
 		ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, timePotionLong, I); 
@@ -68,7 +67,8 @@ public class ItemRegistry
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_diamond)
 			, new ItemStack(Items.diamond)
 			, new ItemStack(Items.apple));
-		
+		GameRegistry.addSmelting(apple_diamond, new ItemStack(Items.diamond, 1),	0);
+
 		//TODO: something with digSlowdown (mining fatigue) as tradeoff for..?
  
 	}
