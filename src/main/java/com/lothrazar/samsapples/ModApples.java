@@ -3,6 +3,7 @@ package com.lothrazar.samsapples;
 import java.util.Random;
 
 import org.apache.logging.log4j.Logger;  
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.Tessellator;
@@ -16,6 +17,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
@@ -32,6 +34,8 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
   
 @Mod(modid = ModApples.MODID, useMetadata=true)  
 public class ModApples
@@ -116,14 +120,16 @@ public class ModApples
 		proxy.registerRenderers();
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
 	{
-		World world = Minecraft.getMinecraft().getIntegratedServer().getEntityWorld();
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer; 
- 
+		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;  
+		//World world = player.worldObj;//Minecraft.getMinecraft().getIntegratedServer().getEntityWorld();
+	
 		if(player.isPotionActive(PotionRegistry.nav_id) && 
-				Minecraft.getMinecraft().gameSettings.showDebugInfo == false)
+				Minecraft.getMinecraft().gameSettings.showDebugInfo == false && 
+				player.worldObj.isRemote == true)//client side only
 		{
 			int size = 16;
 			
@@ -133,6 +139,14 @@ public class ModApples
 
 			renderItemAt(new ItemStack(Items.clock),xLeft,yBottom,size);
 			renderItemAt(new ItemStack(Items.compass),xRight,yBottom,size);
+
+			World world = null;
+		
+			if(MinecraftServer.getServer().worldServers.length > 0)
+			{
+				world = MinecraftServer.getServer().getEntityWorld();
+			}
+			else System.out.println("worldServers do not exist");
 			
 			if(isSlimeChunk(world,player.getPosition()))
 			{
@@ -142,9 +156,9 @@ public class ModApples
 	}
 	private boolean isSlimeChunk(World world, BlockPos pos)
 	{
+		if(world == null){return false;}//shouldnt happen anymore since i check worldServers.length above now
 		long seed =  world.getSeed();
-    
-		
+		if(seed == 0){return false;}//on a server where seed is hidden
 		
 		Chunk in = world.getChunkFromBlockCoords(pos);
 
@@ -159,6 +173,7 @@ public class ModApples
     
 		return isSlimeChunk;
 	}
+	@SideOnly(Side.CLIENT)
 	private static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
 		@SuppressWarnings("deprecation")
@@ -168,6 +183,7 @@ public class ModApples
 		
 		renderTexture( textureAtlasSprite, x, y, dim);
 	}
+	@SideOnly(Side.CLIENT)
 	public static void renderTexture( TextureAtlasSprite textureAtlasSprite , int x, int y, int dim)
 	{	
 		//special thanks to http://www.minecraftforge.net/forum/index.php?topic=26613.0
