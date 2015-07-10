@@ -1,0 +1,10 @@
+itemGroup.tabSamsApples=Magic Apples
+item.apple_bone.name=Bone Apple
+item.apple_emerald.name=Emerald Apple
+item.apple_netherwart.name=Nether Apple
+item.apple_ender.name=Ender Apple
+item.apple_diamond.name=Diamond Apple
+item.apple_lapis.name=Lapis Apple
+item.apple_chocolate.name=Chocolate Apple
+potion.ender=Ender Aura
+potion.nav=Navigation Aura
