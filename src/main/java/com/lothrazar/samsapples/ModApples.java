@@ -109,44 +109,10 @@ public class ModApples
 				EntityItem entityItem = new EntityItem(event.entityLiving.worldObj, event.targetX,event.targetY,event.targetZ, new ItemStack(Items.ender_pearl)); 
 				event.entityLiving.worldObj.spawnEntityInWorld(entityItem);
 
-				
-				if(event.entityLiving.ridingEntity != null && event.entityLiving instanceof EntityPlayer)
-				{
-					EntityPlayer player = (EntityPlayer)event.entityLiving;
-					 
-					player.getEntityData().setInteger(NBT_RIDING_ENTITY, event.entityLiving.ridingEntity.getEntityId());
-					
-					event.entityLiving.ridingEntity.setPositionAndUpdate(event.targetX, event.targetY, event.targetZ);
-		 
-				}
 			}
 		}
 	}
-	public static final String NBT_RIDING_ENTITY = "ride";
-	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event) 
-	{  
-		if(event.entityLiving == null){return;}
-		
-		if(event.entityLiving instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer)event.entityLiving;
-			
-			int setride = player.getEntityData().getInteger(NBT_RIDING_ENTITY);
-			
-			if(setride > 0 && event.entityLiving.ridingEntity == null)
-			{ 
-				Entity horse = event.entityLiving.worldObj.getEntityByID(setride);
-				 
-				if(horse != null)
-				{
-					event.entityLiving.mountEntity(horse);
-					player.getEntityData().setInteger(NBT_RIDING_ENTITY, -1);
-				}
-			}
-			
-		}
-	}
+
 	public static String lang(String name)
 	{
 		return StatCollector.translateToLocal(name);
