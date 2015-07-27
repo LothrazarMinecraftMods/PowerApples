@@ -94,11 +94,10 @@ public class ItemRegistry
 		ItemRegistry.registerItem(ItemRegistry.apple_slowfall, "apple_slowfall");
 		ItemRegistry.apple_slowfall.addEffect(PotionRegistry.slowfall.id, time, I); 
 		//ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_slowfall,new ItemStack(Items.feather));
-
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_diamond)
-			, new ItemStack(Items.diamond)
-			, new ItemStack(Items.apple));
-		GameRegistry.addSmelting(apple_diamond, new ItemStack(Items.fish, clownfish),	0);
+ 
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_slowfall)
+			, new ItemStack(Items.apple)
+			, new ItemStack(Items.fish,1,clownfish)); 
 		
 	}
 	
