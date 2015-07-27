@@ -2,8 +2,7 @@ package com.lothrazar.samsapples;
 
 import java.util.Random;
 
-import org.apache.logging.log4j.Logger;  
-
+import org.apache.logging.log4j.Logger;   
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.Tessellator;
@@ -59,30 +58,16 @@ public class ModApples
 			return ItemRegistry.apple_chocolate;
 		}
 	};    
-	public static void playSoundAt(Entity player, String sound)
-	{ 
-		player.worldObj.playSoundAtEntity(player, sound, 1.0F, 1.0F);
-	}
-	public static void spawnParticle(World world, EnumParticleTypes type, BlockPos pos)
-	{
-		if(pos != null)
-			spawnParticle(world,type,pos.getX(),pos.getY(),pos.getZ());
-    }
-	public static void spawnParticle(World world, EnumParticleTypes type, double x, double y, double z)
-	{ 
-		//http://www.minecraftforge.net/forum/index.php?topic=9744.0
-		for(int countparticles = 0; countparticles <= 10; ++countparticles)
-		{
-			world.spawnParticle(type, x + (world.rand.nextDouble() - 0.5D) * (double)0.8, y + world.rand.nextDouble() * (double)1.5 - (double)0.1, z + (world.rand.nextDouble() - 0.5D) * (double)0.8, 0.0D, 0.0D, 0.0D);
-		} 
-    }
+
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{ 
 		logger = event.getModLog();  
 		
 		//cfg = new ConfigRegistry(new Configuration(event.getSuggestedConfigurationFile()));
-	  
+		/*	slowfallSpeed = instance.getFloat("slowfall_speed",category, 0.41F,0.1F,1F,
+		"This factor affects how much the slowfall effect slows down the entity.");
+*/
     	//network = NetworkRegistry.INSTANCE.newSimpleChannel( Reference.MODID );     	
     	
     	//network.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, MessageKeyPressed.ID, Side.SERVER);
@@ -157,6 +142,27 @@ public class ModApples
 				renderItemAt(new ItemStack(Items.slime_ball),xLeft + size+1,yBottom,size);
 			}
 		}
+	}	
+	
+	@SubscribeEvent
+	public void onEntityUpdate(LivingUpdateEvent event) 
+	{  
+		if(event.entityLiving == null){return;}
+		
+		if(event.entityLiving instanceof EntityPlayer)
+		{
+			//SpellGhost.onPlayerUpdate(event); 
+			
+			//SpellRegistry.tickSpellTimer((EntityPlayer)event.entityLiving);
+		}
+
+		PotionRegistry.tickSlowfall(event);
+	     
+		PotionRegistry.tickWaterwalk(event);
+	     
+		//PotionRegistry.tickLavawalk(event);
+ 
+		//PotionRegistry.tickFrost(event); 
 	}
 	
 	private boolean isSlimeChunk(World world, BlockPos pos)

@@ -28,7 +28,10 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_lapis; 
 	public static ItemFoodAppleMagic apple_chocolate;
 	public static ItemFoodAppleMagic apple_netherwart; 
-  
+	public static ItemFoodAppleMagic apple_prismarine;
+	public static ItemFoodAppleMagic apple_slowfall;
+	
+  public static final int clownfish = 2;
 
 	public static final int dye_cocoa = 3;
 	public static final int dye_lapis = 4;
@@ -80,6 +83,23 @@ public class ItemRegistry
 		ItemRegistry.apple_netherwart.addEffect(Potion.digSlowdown.id, time, I); //Mining Fatigue
 		ItemRegistry.apple_netherwart.addEffect(Potion.waterBreathing.id, time, I);  
 		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_netherwart,new ItemStack(Items.nether_wart));
+
+		apple_prismarine = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.registerItem(ItemRegistry.apple_prismarine, "apple_prismarine");
+		ItemRegistry.apple_prismarine.addEffect(PotionRegistry.waterwalk.id, time, I); 
+		ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_prismarine,new ItemStack(Items.prismarine_shard));
+		
+
+		apple_slowfall = new ItemFoodAppleMagic(hunger, false);
+		ItemRegistry.registerItem(ItemRegistry.apple_slowfall, "apple_slowfall");
+		ItemRegistry.apple_slowfall.addEffect(PotionRegistry.slowfall.id, time, I); 
+		//ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_slowfall,new ItemStack(Items.feather));
+
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_diamond)
+			, new ItemStack(Items.diamond)
+			, new ItemStack(Items.apple));
+		GameRegistry.addSmelting(apple_diamond, new ItemStack(Items.fish, clownfish),	0);
+		
 	}
 	
 	public static void registerItem(Item item, String name)

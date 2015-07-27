@@ -1,7 +1,9 @@
 package com.lothrazar.samsapples;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier; 
+import java.lang.reflect.Modifier;  
+ 
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +22,11 @@ public class PotionRegistry
 	//public static Potion tired;//http://www.minecraftforge.net/wiki/Potion_Tutorial
 	public static Potion ender;
 	public static Potion nav;
+	public static Potion waterwalk;
+	public static Potion slowfall; 
+	//public static Potion lavawalk;
+	//public static Potion frost;
+	
 	public final static int I = 0; 
 	public final static int II = 1;
 	public final static int III = 2;
@@ -27,6 +34,14 @@ public class PotionRegistry
 	public final static int V = 4;
 	public static int ender_id = 50;
 	public static int nav_id = 51;
+	public static int waterwalk_id = 52;
+	public static int slowfall_id = 53;
+//	public static int lavawalk_id = 54;
+//	public static int frost_id = 55;
+	
+	public static float slowfallSpeed = 0.41f;
+
+	
 	public static void registerPotionEffects()
 	{ 
 		initPotionTypesReflection();
@@ -41,7 +56,9 @@ public class PotionRegistry
 		//
 		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
 		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
-		
+		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("waterwalk") , false, 0, new ItemStack(Items.prismarine_shard))).setPotionName("potion.waterwalk");
+		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("slowfall"), false, 0, new ItemStack(Items.feather))).setPotionName("potion.slowfall");
+	 
 	}
 
 	private static void initPotionTypesReflection() 
@@ -74,5 +91,91 @@ public class PotionRegistry
 	        }
 	    }
 	}
+	
+	
+
+/*
+	public static void tickFrost(LivingUpdateEvent event) 
+	{ 
+		if(event.entityLiving.isPotionActive(PotionRegistry.frost)) 
+	    { 
+			World world = event.entityLiving.worldObj;
+			BlockPos pos = event.entityLiving.getPosition();
+
+			if(world.rand.nextDouble() < 0.5)
+				doPotionParticle(world,event.entityLiving,EnumParticleTypes.SNOWBALL);
+
+			if(world.rand.nextDouble() < 0.3 && 
+				//world.getBlockState(pos).getBlock().isReplaceable(world, pos) &&
+				world.getBlockState(pos.down()).getBlock() != Blocks.snow_layer && 
+				//world.getBlockState(pos).getBlock().isReplaceable(world, pos.down()) == false &&//dont place above torches/snow/grass
+				
+				world.isAirBlock(pos.down()) == false)//dont place above air
+			{
+				world.setBlockState( pos, Blocks.snow_layer.getDefaultState());
+			}
+	    } 
+	}*/
+	
+/*
+	public static void tickLavawalk(LivingUpdateEvent event) 
+	{
+		if(event.entityLiving.isPotionActive(PotionRegistry.lavawalk)) 
+	    {
+			tickLiquidWalk(event,Blocks.lava);
+	    }
+	}*/
+
+	public static void tickWaterwalk(LivingUpdateEvent event) 
+	{
+		if(event.entityLiving.isPotionActive(PotionRegistry.waterwalk)) 
+	    {
+			tickLiquidWalk(event,Blocks.water);
+	    }
+	}
  
+	private static void tickLiquidWalk(LivingUpdateEvent event, Block liquid)
+	{
+    	 World world = event.entityLiving.worldObj;
+    	 
+    	 if(world.getBlockState(event.entityLiving.getPosition().down()).getBlock() == liquid && 
+    			 world.isAirBlock(event.entityLiving.getPosition()) && 
+    			 event.entityLiving.motionY < 0)
+    	 { 
+    		 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel it
+    		 {
+    			 EntityPlayer p = (EntityPlayer)event.entityLiving;
+    			 if(p.isSneaking())
+    				 return;//let them slip down into it
+    		 }
+    		 
+    		 event.entityLiving.motionY  = 0;//stop falling
+    		 event.entityLiving.onGround = true; //act as if on solid ground
+    		 event.entityLiving.setAIMoveSpeed(0.1F);//walking and not sprinting is this speed
+    	 }  
+	}
+	
+	public static void tickSlowfall(LivingUpdateEvent event) 
+	{
+		 if(event.entityLiving.isPotionActive(PotionRegistry.slowfall)) 
+	     { 
+			 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel
+			 {
+    			 EntityPlayer p = (EntityPlayer)event.entityLiving;
+    			 if(p.isSneaking())
+    			 {
+    				 return;//so fall normally for now
+    			 }
+    		 }
+			 //else: so we are either a non-sneaking player, or a non player entity
+			  
+	    	 //a normal fall seems to go up to 0, -1.2, -1.4, -1.6, then flattens out at -0.078 
+	    	 if(event.entityLiving.motionY < 0)
+	    	 { 
+				event.entityLiving.motionY *= slowfallSpeed;
+				  
+				event.entityLiving.fallDistance = 0f; //for no fall damage
+	    	 } 
+	     }
+	}	 
 }
