@@ -3,10 +3,10 @@
   "modList": [{
     "modid": "samsapples",
     "name": "Power Apples",
-    "description": "Adds seven apples to the game made of bone, chocolate, diamond, lapis, emerald, netherwart, and ender pearls..",
-    "version": "1.8-1.1.0",
+    "description": "Adds nine apples to the game made of bone, chocolate, diamond, lapis, emerald, netherwart, clownfish, prismarine, and ender pearls.  See config file and curseforge post for details.",
+    "version": "1.8-1.1.1",
     "mcversion": "1.8",
-    "url": "https://github.com/PrinceOfAmber/SamsPowerups/releases",
+    "url": "http://www.curse.com/mc-mods/minecraft/232093-power-apples",
     "updateUrl": "",
     "authorList": [ "Lothrazar" ],
     "credits": "Thanks to LexManos for the gradle video, and everyone on the forums",
