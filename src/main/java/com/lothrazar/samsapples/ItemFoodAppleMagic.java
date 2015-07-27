@@ -73,16 +73,28 @@ public class ItemFoodAppleMagic extends ItemFood
 		 else 
 			 return EnumRarity.RARE;
 	} 
-	 
-	public static void addRecipe(ItemFoodAppleMagic apple, ItemStack ingredient) 
+	final static int smeltexp = 0;
+	public static void addRecipe(ItemFoodAppleMagic apple, ItemStack ingredient, boolean isExpensive) 
 	{
-		GameRegistry.addRecipe(new ItemStack(apple)
-			,"lll","lal","lll"  
-			,'l', ingredient
-			,'a', Items.apple);
+		int refund = 8;
 		
-		//if(ModApples.cfg.uncraftGeneral) 
-			GameRegistry.addSmelting(apple, new ItemStack(ingredient.getItem(), 8, ingredient.getMetadata()),	0);
+		if(isExpensive)
+		{ 
+			GameRegistry.addRecipe(new ItemStack(apple)
+				,"lll","lal","lll"  
+				,'l', ingredient
+				,'a', Items.apple); 
+		}
+		else
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(apple)
+				,ingredient
+				, Items.apple);
+	 
+			refund = 1; 
+		}
+		
+		GameRegistry.addSmelting(apple, new ItemStack(ingredient.getItem(), refund, ingredient.getMetadata()),	smeltexp);
 	} 
 	 
 	@Override
