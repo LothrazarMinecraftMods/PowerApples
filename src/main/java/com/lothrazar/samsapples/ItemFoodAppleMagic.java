@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
@@ -50,12 +51,7 @@ public class ItemFoodAppleMagic extends ItemFood
 	@Override
 	protected void onFoodEaten(ItemStack par1ItemStack, World world, EntityPlayer player)
     {     
-		if(world.isRemote == false)  //false means serverside
-	  		for(int i = 0; i < potionIds.size(); i++)  
-	  		{ 
-	  			addOrMergePotionEffect(player, new PotionEffect(potionIds.get(i) ,potionDurations.get(i),potionAmplifiers.get(i)));
-	  		//	par3EntityPlayer.addPotionEffect();
-	  		}  
+		addAllEffects(world, player);  
     }
 	
 	@Override
@@ -109,7 +105,17 @@ public class ItemFoodAppleMagic extends ItemFood
   		}   
 	} 
 
-	public static void addOrMergePotionEffect(EntityPlayer player, PotionEffect newp)
+	public void addAllEffects(World world, EntityLivingBase player) 
+	{
+		if(world.isRemote == false)  //false means serverside
+	  		for(int i = 0; i < potionIds.size(); i++)  
+	  		{ 
+	  			addOrMergePotionEffect(player, new PotionEffect(potionIds.get(i) ,potionDurations.get(i),potionAmplifiers.get(i)));
+	  		//	par3EntityPlayer.addPotionEffect();
+	  		}
+	}
+	
+	public static void addOrMergePotionEffect(EntityLivingBase player, PotionEffect newp)
 	{
 		if(player.isPotionActive(newp.getPotionID()))
 		{

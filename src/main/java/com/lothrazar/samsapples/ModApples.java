@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -192,6 +194,33 @@ public class ModApples
 			}
 		}
 	}	
+	
+	@SubscribeEvent
+	public void entityInteractEvent(EntityInteractEvent event)
+    {
+		if(event.target == null || event.entityPlayer == null){return;}//dont think this ever happens
+		
+		if(event.entityPlayer.getHeldItem() != null && 
+				event.entityPlayer.getHeldItem().getItem() instanceof ItemFoodAppleMagic
+				&& event.target instanceof EntityLivingBase)
+		{
+			ItemFoodAppleMagic item = (ItemFoodAppleMagic)event.entityPlayer.getHeldItem().getItem();
+			
+			EntityLivingBase mob = (EntityLivingBase)event.target;
+			
+			item.addAllEffects(event.entity.worldObj, mob);
+		
+			if (event.entityPlayer.capabilities.isCreativeMode == false)
+	        {
+				event.entityPlayer.inventory.decrStackSize(event.entityPlayer.inventory.currentItem, 1);
+	        }
+	 
+			event.entityPlayer.worldObj.playSoundAtEntity(mob, "random.eat", 1.0F, 1.0F);
+			//event.entityLiving .setea
+			mob.setEating(true); //makes horse animate and bend down to eat
+			
+		}
+    }
 	
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event) 
