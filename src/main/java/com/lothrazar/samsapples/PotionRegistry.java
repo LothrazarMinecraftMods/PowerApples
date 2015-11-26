@@ -2,7 +2,9 @@ package com.lothrazar.samsapples;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;   
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -51,7 +53,7 @@ public class PotionRegistry
 		//
 		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
 		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
-		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("waterwalk") , false, 0, new ItemStack(Items.prismarine_shard))).setPotionName("potion.waterwalk");
+		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("waterwalk") , false, 0, new ItemStack(Items.quartz))).setPotionName("potion.waterwalk");
 		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("slowfall"), false, 0, new ItemStack(Items.feather))).setPotionName("potion.slowfall");
 	 
 	}
@@ -132,9 +134,10 @@ public class PotionRegistry
 	private static void tickLiquidWalk(LivingUpdateEvent event, Block liquid)
 	{
     	 World world = event.entityLiving.worldObj;
+    	 EntityLivingBase e = event.entityLiving;
     	 
-    	 if(world.getBlockState(event.entityLiving.getPosition().down()).getBlock() == liquid && 
-    			 world.isAirBlock(event.entityLiving.getPosition()) && 
+    	 if(world.getBlock((int)e.posX, (int)e.posY-1,(int)e.posZ) == liquid && 
+    			 world.isAirBlock((int)e.posX, (int)e.posY,(int)e.posZ) && 
     			 event.entityLiving.motionY < 0)
     	 { 
     		 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel it

@@ -1,11 +1,13 @@
 package com.lothrazar.samsapples;
 
 import java.util.ArrayList;
+
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
    
 public class ItemRegistry 
 { 
@@ -70,8 +72,8 @@ public class ItemRegistry
 		{
 			ItemRegistry.apple_emerald = new ItemFoodAppleMagic(hunger, false);
 			ItemRegistry.apple_emerald.addEffect(Potion.moveSpeed.id, time, II);  
-			ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, time, I);  
-			ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, time, I); 
+			//ItemRegistry.apple_emerald.addEffect(Potion.absorption.id, time, I);  
+			//ItemRegistry.apple_emerald.addEffect(Potion.saturation.id, time, I); 
 			ItemRegistry.registerItem(ItemRegistry.apple_emerald, "apple_emerald");
 			ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_emerald,new ItemStack(Items.emerald),apple_emerald_expensive);
 		}
@@ -97,8 +99,8 @@ public class ItemRegistry
 			ItemRegistry.apple_diamond = new ItemFoodAppleMagic(hunger, false);
 			ItemRegistry.registerItem(ItemRegistry.apple_diamond, "apple_diamond");
 			ItemRegistry.apple_diamond.addEffect(Potion.resistance.id, time, I); 
-			ItemRegistry.apple_diamond.addEffect(Potion.healthBoost.id, time, V); 
-			ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, time, I); 	
+			//ItemRegistry.apple_diamond.addEffect(Potion..id, time, V); //NOT EXIST 1710
+			//ItemRegistry.apple_diamond.addEffect(Potion.saturation.id, time, I); 	
 			
 			ItemFoodAppleMagic.addRecipe(apple_diamond,new ItemStack(Items.diamond),apple_diamond_expensive);
 		 
@@ -126,7 +128,7 @@ public class ItemRegistry
 			apple_prismarine = new ItemFoodAppleMagic(hunger, false);
 			ItemRegistry.registerItem(ItemRegistry.apple_prismarine, "apple_prismarine");
 			ItemRegistry.apple_prismarine.addEffect(PotionRegistry.waterwalk.id, time, I); 
-			ItemFoodAppleMagic.addRecipe(apple_prismarine,new ItemStack(Items.prismarine_shard),apple_prismarine_expensive);
+			ItemFoodAppleMagic.addRecipe(apple_prismarine,new ItemStack(Blocks.quartz_block),apple_prismarine_expensive);
 		}
 
 		if(apple_clownfish_enabled)

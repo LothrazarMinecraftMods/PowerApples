@@ -3,9 +3,9 @@ package com.lothrazar.samsapples;
 import java.util.ArrayList; 
 import java.util.List; 
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -64,9 +64,9 @@ public class ItemFoodAppleMagic extends ItemFood
 	public EnumRarity getRarity(ItemStack par1ItemStack)
 	{
 		 if(hasEffect)
-			 return EnumRarity.EPIC; //dynamic text to match the two apple colours
+			 return EnumRarity.epic; //dynamic text to match the two apple colours
 		 else 
-			 return EnumRarity.RARE;
+			 return EnumRarity.rare;
 	} 
 	final static int smeltexp = 0;
 	public static void addRecipe(ItemFoodAppleMagic apple, ItemStack ingredient, boolean isExpensive) 
@@ -89,7 +89,7 @@ public class ItemFoodAppleMagic extends ItemFood
 			refund = 1; 
 		}
 		
-		GameRegistry.addSmelting(apple, new ItemStack(ingredient.getItem(), refund, ingredient.getMetadata()),	smeltexp);
+		GameRegistry.addSmelting(apple, new ItemStack(ingredient.getItem(), refund, ingredient.getItemDamage()),	smeltexp);
 	} 
 	 
 	@Override

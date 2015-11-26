@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.model.IBakedModel;
+//import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -18,8 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.server.MinecraftServer; 
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -29,16 +28,16 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
   
 @Mod(modid = ModApples.MODID, useMetadata=true)  
 public class ModApples
@@ -186,7 +185,7 @@ public class ModApples
 			}
 			else System.out.println("worldServers do not exist");
 			
-			if(isSlimeChunk(world,player.getPosition()))
+			if(isSlimeChunk(world,player.posX,player.posY,player.posZ))
 			{
 				renderItemAt(new ItemStack(Items.slime_ball),xLeft + size+1,yBottom,size);
 			}
@@ -241,13 +240,13 @@ public class ModApples
 		//PotionRegistry.tickFrost(event); 
 	}
 	
-	private boolean isSlimeChunk(World world, BlockPos pos)
+	private boolean isSlimeChunk(World world, double posX,double posY,double posZ)
 	{
 		if(world == null){return false;}//shouldnt happen anymore since i check worldServers.length above now
 		long seed =  world.getSeed();
 		if(seed == 0){return false;}//on a server where seed is hidden
 		
-		Chunk in = world.getChunkFromBlockCoords(pos);
+		Chunk in = world.getChunkFromBlockCoords((int)posX,(int)posZ);
 
 		//formula source : http://minecraft.gamepedia.com/Slime
 		Random rnd = new Random(seed +
@@ -261,9 +260,9 @@ public class ModApples
 		return isSlimeChunk;
 	}
 	@SideOnly(Side.CLIENT)
-	private static void renderItemAt(ItemStack stack, int x, int y, int dim)
+	public static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
-		@SuppressWarnings("deprecation")
+		@SuppressWarnings("deprecation") 
 		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
 		@SuppressWarnings("deprecation")
 		TextureAtlasSprite textureAtlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(iBakedModel.getTexture().getIconName());
@@ -276,15 +275,15 @@ public class ModApples
 		//special thanks to http://www.minecraftforge.net/forum/index.php?topic=26613.0
 		
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		Tessellator tessellator = Tessellator.getInstance();
+		Tessellator tessellator = Tessellator.instance;
 
 		int height = dim, width = dim;
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.addVertexWithUV((double)(x),          (double)(y + height),  0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMaxV());
-		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y + height),  0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMaxV());
-		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y),           0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMinV());
-		worldrenderer.addVertexWithUV((double)(x),          (double)(y),           0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMinV());
+		//WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double)(x),          (double)(y + height),  0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMaxV());
+		tessellator.addVertexWithUV((double)(x + width),  (double)(y + height),  0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMaxV());
+		tessellator.addVertexWithUV((double)(x + width),  (double)(y),           0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMinV());
+		tessellator.addVertexWithUV((double)(x),          (double)(y),           0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMinV());
 		tessellator.draw();
 	}
 }
