@@ -136,8 +136,9 @@ public class PotionRegistry
     	 World world = event.entityLiving.worldObj;
     	 EntityLivingBase e = event.entityLiving;
     	 
-    	 if(world.getBlock((int)e.posX, (int)e.posY-1,(int)e.posZ) == liquid && 
-    			 world.isAirBlock((int)e.posX, (int)e.posY,(int)e.posZ) && 
+    	 if( (world.getBlock((int)e.posX, (int)e.posY-2,(int)e.posZ) == liquid || 
+    			 world.getBlock((int)e.posX, (int)e.posY-1,(int)e.posZ) == liquid) && 
+    			 //world.isAirBlock((int)e.posX, (int)e.posY,(int)e.posZ) && 
     			 event.entityLiving.motionY < 0)
     	 { 
     		 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel it
