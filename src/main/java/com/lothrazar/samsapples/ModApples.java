@@ -262,18 +262,23 @@ public class ModApples
 	@SideOnly(Side.CLIENT)
 	public static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
+		Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
+		
+		/*
 		@SuppressWarnings("deprecation") 
 		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
 		@SuppressWarnings("deprecation")
 		TextureAtlasSprite textureAtlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(iBakedModel.getTexture().getIconName());
-		
-		renderTexture( textureAtlasSprite, x, y, dim);
+		*/
+		if(stack.getIconIndex()  instanceof TextureAtlasSprite)
+			renderTexture( (TextureAtlasSprite)stack.getIconIndex() , x, y, dim);
 	}
 	@SideOnly(Side.CLIENT)
 	public static void renderTexture( TextureAtlasSprite textureAtlasSprite , int x, int y, int dim)
 	{	
 		//special thanks to http://www.minecraftforge.net/forum/index.php?topic=26613.0
-		
+		//1.7 help thanks to https://github.com/Zyin055/zyinhud/blob/26f52ca29894447bca4378ef30f551b397ab7a29/src/main/java/com/zyin/zyinhud/mods/DurabilityInfo.java
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 		Tessellator tessellator = Tessellator.instance;
 
