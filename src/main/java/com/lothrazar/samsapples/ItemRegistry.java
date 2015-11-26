@@ -25,7 +25,7 @@ public class ItemRegistry
 	public static boolean apple_emerald_enabled;
 	public static boolean apple_diamond_enabled; 
 	public static boolean apple_ender_enabled; 
-	public static boolean apple_bone_enabled; 
+	//public static boolean apple_bone_enabled; 
 	public static boolean apple_lapis_enabled; 
 	public static boolean apple_chocolate_enabled;
 	public static boolean apple_netherwart_enabled; 
@@ -45,7 +45,7 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_emerald;
 	public static ItemFoodAppleMagic apple_diamond; 
 	public static ItemFoodAppleMagic apple_ender; 
-	public static ItemFoodAppleMagic apple_bone; 
+	//public static ItemFoodAppleMagic apple_bone; 
 	public static ItemFoodAppleMagic apple_lapis; 
 	public static ItemFoodAppleMagic apple_chocolate;
 	public static ItemFoodAppleMagic apple_netherwart; 
@@ -105,7 +105,7 @@ public class ItemRegistry
 			ItemFoodAppleMagic.addRecipe(apple_diamond,new ItemStack(Items.diamond),apple_diamond_expensive);
 		 
 		}
-		
+		/*
 		if(apple_bone_enabled)
 		{
 			apple_bone = new ItemFoodAppleMagic(hunger, false);
@@ -113,7 +113,7 @@ public class ItemRegistry
 			ItemRegistry.apple_bone.addEffect(PotionRegistry.nav.id, time, I); 
 			ItemFoodAppleMagic.addRecipe(apple_bone,new ItemStack(Items.bone),apple_bone_expensive);
 		}
-		
+		*/
 		if(apple_netherwart_enabled)
 		{
 			apple_netherwart = new ItemFoodAppleMagic(hunger, false);

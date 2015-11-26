@@ -18,7 +18,7 @@ public class PotionRegistry
 { 
 	//public static Potion tired;//http://www.minecraftforge.net/wiki/Potion_Tutorial
 	public static Potion ender;
-	public static Potion nav;
+	//public static Potion nav;
 	public static Potion waterwalk;
 	public static Potion slowfall; 
 	//public static Potion lavawalk;
@@ -30,7 +30,7 @@ public class PotionRegistry
 	public final static int IV = 3;
 	public final static int V = 4;
 	public static int ender_id = 50;
-	public static int nav_id = 51;
+	//public static int nav_id = 51;
 	public static int waterwalk_id = 52;
 	public static int slowfall_id = 53;
 //	public static int lavawalk_id = 54;
@@ -52,7 +52,7 @@ public class PotionRegistry
 		//???http://www.minecraftforge.net/forum/index.php?topic=12358.0
 		//
 		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
-		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
+		//PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
 		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("waterwalk") , false, 0, new ItemStack(Items.quartz))).setPotionName("potion.waterwalk");
 		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("slowfall"), false, 0, new ItemStack(Items.feather))).setPotionName("potion.slowfall");
 	 

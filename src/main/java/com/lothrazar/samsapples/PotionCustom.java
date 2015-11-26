@@ -35,8 +35,8 @@ public class PotionCustom extends Potion
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) 
 	{
-		int border = 6;
-		ModApples.renderItemAt(icon, x + border, y + border, 16);
+		//int border = 6;
+		//ModApples.renderItemAt(icon, x + border, y + border, 16);
 		/*
 		@SuppressWarnings("deprecation")
 		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(icon);

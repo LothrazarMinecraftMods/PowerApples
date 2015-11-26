@@ -70,7 +70,7 @@ public class ModApples
 		cfg.load();
 		
 
-		ItemRegistry.apple_bone_enabled = cfg.get( category, "apple_bone_enabled",true).getBoolean();
+		//ItemRegistry.apple_bone_enabled = cfg.get( category, "apple_bone_enabled",true).getBoolean();
 		ItemRegistry.apple_emerald_enabled = cfg.get( category, "apple_emerald_enabled",true).getBoolean();
 		ItemRegistry.apple_diamond_enabled = cfg.get( category, "apple_diamond_enabled",true).getBoolean();
 		ItemRegistry.apple_ender_enabled = cfg.get( category, "apple_ender_enabled",true).getBoolean();
@@ -110,7 +110,7 @@ public class ModApples
 		
 		
 		PotionRegistry.ender_id = cfg.get(category,"ender_id", 50).getInt();
-		PotionRegistry.nav_id = cfg.get(category,"nav_id", 51).getInt();
+		//PotionRegistry.nav_id = cfg.get(category,"nav_id", 51).getInt();
 		PotionRegistry.waterwalk_id = cfg.get(category,"waterwalk_id", 52).getInt(); 
 		PotionRegistry.slowfall_id = cfg.get(category,"slowfall_id", 53).getInt();
 		
@@ -156,7 +156,7 @@ public class ModApples
 	{       
 		proxy.registerRenderers();
 	}
-	
+	/*
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
@@ -190,7 +190,7 @@ public class ModApples
 				renderItemAt(new ItemStack(Items.slime_ball),xLeft + size+1,yBottom,size);
 			}
 		}
-	}	
+	}	*/
 	
 	@SubscribeEvent
 	public void entityInteractEvent(EntityInteractEvent event)
@@ -259,17 +259,12 @@ public class ModApples
     
 		return isSlimeChunk;
 	}
+	/*
 	@SideOnly(Side.CLIENT)
 	public static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
-		//Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-		
-		/*
-		@SuppressWarnings("deprecation") 
-		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
-		@SuppressWarnings("deprecation")
-		TextureAtlasSprite textureAtlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(iBakedModel.getTexture().getIconName());
-		*/
+		System.out.println(stack.getUnlocalizedName()+" render");
+	 
 		if(stack.getIconIndex()  instanceof TextureAtlasSprite)
 			renderTexture( (TextureAtlasSprite)stack.getIconIndex() , x, y, dim);
 	}
@@ -290,5 +285,5 @@ public class ModApples
 		tessellator.addVertexWithUV((double)(x + width),  (double)(y),           0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMinV());
 		tessellator.addVertexWithUV((double)(x),          (double)(y),           0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMinV());
 		tessellator.draw();
-	}
+	}*/
 }
