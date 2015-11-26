@@ -143,10 +143,8 @@ public class ItemRegistry
 	
 	public static void registerItem(Item item, String name)
 	{ 
-		 item.setUnlocalizedName(name);
-		 
+		 item.setUnlocalizedName(name).setTextureName(ModApples.MODID+":" + name);
 		 GameRegistry.registerItem(item, name);
-		 
 		 items.add(item);
 	}
 }

@@ -262,7 +262,7 @@ public class ModApples
 	@SideOnly(Side.CLIENT)
 	public static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
-		Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
+		//Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
 		
 		/*
 		@SuppressWarnings("deprecation") 
