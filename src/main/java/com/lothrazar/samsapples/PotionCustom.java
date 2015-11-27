@@ -40,30 +40,6 @@ public class PotionCustom extends Potion
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) 
 	{
-		@SuppressWarnings("deprecation")
-		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(icon);
-		@SuppressWarnings("deprecation")
-		TextureAtlasSprite textureAtlasSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(iBakedModel.getTexture().getIconName());
-		
-		int border = 6;
-		renderTexture( textureAtlasSprite, x + border, y + border, 16);
-	
-	}
-	public static void renderTexture( TextureAtlasSprite textureAtlasSprite , int x, int y, int dim)
-	{	
-		//special thanks to http://www.minecraftforge.net/forum/index.php?topic=26613.0
-		
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		Tessellator tessellator = Tessellator.getInstance();
-
-		int height = dim, width = dim;
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.addVertexWithUV((double)(x),          (double)(y + height),  0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMaxV());
-		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y + height),  0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMaxV());
-		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y),           0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMinV());
-		worldrenderer.addVertexWithUV((double)(x),          (double)(y),           0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMinV());
-		tessellator.draw();
-		
+		ModApples.renderItemAt(icon,x,y, 16);
 	}
 }

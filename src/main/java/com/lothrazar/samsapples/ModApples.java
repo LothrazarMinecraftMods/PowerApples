@@ -261,7 +261,7 @@ public class ModApples
 		return isSlimeChunk;
 	}
 	@SideOnly(Side.CLIENT)
-	private static void renderItemAt(ItemStack stack, int x, int y, int dim)
+	public static void renderItemAt(ItemStack stack, int x, int y, int dim)
 	{
 		@SuppressWarnings("deprecation")
 		IBakedModel iBakedModel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
@@ -273,18 +273,22 @@ public class ModApples
 	@SideOnly(Side.CLIENT)
 	public static void renderTexture( TextureAtlasSprite textureAtlasSprite , int x, int y, int dim)
 	{	
+		//TODO: FIX THIS ONE DAY??? http://www.minecraftforge.net/forum/index.php/topic,35181.0.html
 		//special thanks to http://www.minecraftforge.net/forum/index.php?topic=26613.0
-		
+		/*
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 		Tessellator tessellator = Tessellator.getInstance();
 
 		int height = dim, width = dim;
 		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		//worldrenderer.addVertexData(vertexData);
+	 
 		worldrenderer.startDrawingQuads();
 		worldrenderer.addVertexWithUV((double)(x),          (double)(y + height),  0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMaxV());
 		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y + height),  0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMaxV());
 		worldrenderer.addVertexWithUV((double)(x + width),  (double)(y),           0.0, (double)textureAtlasSprite.getMaxU(), (double)textureAtlasSprite.getMinV());
 		worldrenderer.addVertexWithUV((double)(x),          (double)(y),           0.0, (double)textureAtlasSprite.getMinU(), (double)textureAtlasSprite.getMinV());
 		tessellator.draw();
+		*/
 	}
 }
