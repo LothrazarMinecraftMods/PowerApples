@@ -1,6 +1,7 @@
 package com.lothrazar.samsapples;
 
 import java.util.ArrayList;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemRegistry 
 { 
 	public static ArrayList<Item> items = new ArrayList<Item>();
+	public static final String TEXTURE_LOCATION = ModApples.MODID + ":";
 
 	public final static int I = 0; 
 	public final static int II = 1;
@@ -50,7 +52,7 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_prismarine;
 	public static ItemFoodAppleMagic apple_slowfall;
 	
-  private static final int clownfish = 2;
+	private static final int clownfish = 2;
 
 	public static final int dye_cocoa = 3;
 	public static final int dye_lapis = 4;

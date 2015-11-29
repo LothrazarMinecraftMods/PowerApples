@@ -1,11 +1,5 @@
 package com.lothrazar.samsapples;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -40,6 +34,7 @@ public class PotionCustom extends Potion
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) 
 	{
-		ModApples.renderItemAt(icon,x,y, 16);
+		if(icon != null)
+			UtilItemRenderer.renderItemAt(icon,x+6,y+6, 16);
 	}
 }

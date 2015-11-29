@@ -20,7 +20,7 @@ public class ClientProxy extends CommonProxy
  
         for(Item i : ItemRegistry.items)
         {  
-        	name = ModApples.TEXTURE_LOCATION + i.getUnlocalizedName().replaceAll("item.", "");
+        	name = ItemRegistry.TEXTURE_LOCATION + i.getUnlocalizedName().replaceAll("item.", "");
 
    			mesher.register(i, 0, new ModelResourceLocation( name , "inventory"));	 
         } 
