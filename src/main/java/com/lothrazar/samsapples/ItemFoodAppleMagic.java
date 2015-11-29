@@ -14,6 +14,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemFoodAppleMagic extends ItemFood
@@ -100,7 +101,7 @@ public class ItemFoodAppleMagic extends ItemFood
   		{ 
   			p = Potion.potionTypes[potionIds.get(i)];
   			 
-  			list.add(ModApples.lang(p.getName()));   
+  			list.add(StatCollector.translateToLocal(p.getName()));   
   		}   
 	} 
 
