@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
   
-@Mod(modid = ModApples.MODID, useMetadata=true)  
+@Mod(modid = ModApples.MODID, useMetadata=true, updateJSON = "https://raw.githubusercontent.com/LothrazarMinecraftMods/PowerApples/master/update.json")  
 public class ModApples
 {
 	public static final String MODID = "samsapples";
