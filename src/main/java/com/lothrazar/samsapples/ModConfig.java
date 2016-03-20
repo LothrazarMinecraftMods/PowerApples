@@ -48,7 +48,7 @@ public class ModConfig
 		
 		
 		PotionRegistry.ender_id = cfg.get(category,"ender_id", 50).getInt();
-		PotionRegistry.nav_id = cfg.get(category,"nav_id", 51).getInt();
+		//PotionRegistry.nav_id = cfg.get(category,"nav_id", 51).getInt();
 		PotionRegistry.waterwalk_id = cfg.get(category,"waterwalk_id", 52).getInt(); 
 		PotionRegistry.slowfall_id = cfg.get(category,"slowfall_id", 53).getInt();
 		

@@ -17,7 +17,7 @@ public class PotionRegistry
 { 
 	//public static Potion tired;//http://www.minecraftforge.net/wiki/Potion_Tutorial
 	public static Potion ender;
-	public static Potion nav;
+	//public static Potion nav;
 	public static Potion waterwalk;
 	public static Potion slowfall; 
 	//public static Potion lavawalk;
@@ -29,7 +29,7 @@ public class PotionRegistry
 	public final static int IV = 3;
 	public final static int V = 4;
 	public static int ender_id = 50;
-	public static int nav_id = 51;
+	//public static int nav_id = 51;
 	public static int waterwalk_id = 52;
 	public static int slowfall_id = 53;
 //	public static int lavawalk_id = 54;
@@ -56,10 +56,10 @@ public class PotionRegistry
 		//http://www.minecraftforge.net/forum/index.php?topic=11024.0
 		//???http://www.minecraftforge.net/forum/index.php?topic=12358.0
 		//resource locations still dont work >< TODO: use them intead of itemstack override
-		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("textures/items/ender_pearl"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
-		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("feather"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
-		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("prismarineShard") , false, 0, new ItemStack(Items.prismarine_shard))).setPotionName("potion.waterwalk");
-		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("slowfall"), false, 0, new ItemStack(Items.feather))).setPotionName("potion.slowfall");
+		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation(ModApples.MODID,"textures/items/apple_ender.png"), false, 0)).setPotionName("potion.ender");	  
+		//PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("minecraft","textures/items/map_empty.png"), false, 0)).setPotionName("potion.nav");	  
+		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("minecraft","textures/items/prismarine_shard.png") , false, 0)).setPotionName("potion.waterwalk");
+		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("minecraft","textures/items/feather.png"), false, 0)).setPotionName("potion.slowfall");
 	 
 	}/*
 

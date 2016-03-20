@@ -110,7 +110,7 @@ public class ItemRegistry
 		{
 			apple_bone = new ItemFoodAppleMagic(hunger, false);
 			ItemRegistry.registerItem(ItemRegistry.apple_bone, "apple_bone");
-			ItemRegistry.apple_bone.addEffect(PotionRegistry.getPotionID(PotionRegistry.nav), time, I); 
+			ItemRegistry.apple_bone.addEffect(PotionRegistry.getPotionID(MobEffects.luck), time, I); 
 			ItemFoodAppleMagic.addRecipe(apple_bone,new ItemStack(Items.bone),apple_bone_expensive);
 		}
 		

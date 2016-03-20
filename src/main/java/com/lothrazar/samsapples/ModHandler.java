@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -33,7 +34,7 @@ public class ModHandler
 			}
 		}
 	}
-	
+	/*
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
@@ -50,8 +51,13 @@ public class ModHandler
 			int xRight = Minecraft.getMinecraft().displayWidth/2 - size*2;
 			int yBottom = Minecraft.getMinecraft().displayHeight/2 - size*2;
 
-			UtilItemRenderer.renderItemAt(new ItemStack(Items.clock),xLeft,yBottom,size);
-			UtilItemRenderer.renderItemAt(new ItemStack(Items.compass),xRight,yBottom,size);
+			ItemStack clock = new ItemStack(Items.clock);
+			clock.updateAnimation(player.worldObj, player, 0, false);
+		
+			UtilItemRenderer.renderItemCurrentGui(clock,xLeft,yBottom,size);
+			UtilItemRenderer.renderItemCurrentGui(new ItemStack(Items.compass),xRight,yBottom,size);
+			//UtilItemRenderer.renderItemAt(new ResourceLocation("minecraft:compass"),xLeft,yBottom);
+			//UtilItemRenderer.renderItemAt(new ResourceLocation("minecraft","clock"),xRight,yBottom);
 
 			World world = null;
 			 
@@ -59,15 +65,18 @@ public class ModHandler
 			{
 				world = player.getServer().getEntityWorld();
 			}
-			else System.out.println("worldServers do not exist");
+			//else System.out.println("worldServers do not exist");
+			if(world==null){
+				world = player.worldObj;
+			}
 			
 			if(UtilSlimeChunk.isSlimeChunk(world,player.getPosition()))
 			{
-				UtilItemRenderer.renderItemAt(new ItemStack(Items.slime_ball),xLeft + size+1,yBottom,size);
+				UtilItemRenderer.renderItemAt(new ResourceLocation("minecraft","slimeball"),xLeft + size+1,yBottom);
 			}
 		}
 	}	
-	
+	*/
 	@SubscribeEvent
 	public void entityInteractEvent(EntityInteractEvent event)
     { 
