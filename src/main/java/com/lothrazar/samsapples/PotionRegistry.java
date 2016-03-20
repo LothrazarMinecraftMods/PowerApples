@@ -1,12 +1,8 @@
 package com.lothrazar.samsapples;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;   
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -16,24 +12,18 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 public class PotionRegistry 
 { 
 	//public static Potion tired;//http://www.minecraftforge.net/wiki/Potion_Tutorial
-	public static Potion ender;
-	//public static Potion nav;
+	public static Potion ender; 
 	public static Potion waterwalk;
-	public static Potion slowfall; 
-	//public static Potion lavawalk;
-	//public static Potion frost;
+	public static Potion slowfall;  
 	
 	public final static int I = 0; 
 	public final static int II = 1;
 	public final static int III = 2;
 	public final static int IV = 3;
 	public final static int V = 4;
-	public static int ender_id = 50;
-	//public static int nav_id = 51;
+	public static int ender_id = 50; 
 	public static int waterwalk_id = 52;
-	public static int slowfall_id = 53;
-//	public static int lavawalk_id = 54;
-//	public static int frost_id = 55;
+	public static int slowfall_id = 53; 
 	
 	public static float slowfallSpeed = 0.41f;
 	
@@ -46,8 +36,6 @@ public class PotionRegistry
 	
 	public static void registerPotionEffects()
 	{ 
-		//initPotionTypesReflection();
-	     
 	    registerNewPotionEffects(); 
 	}
  
@@ -61,73 +49,8 @@ public class PotionRegistry
 		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("minecraft","textures/items/prismarine_shard.png") , false, 0)).setPotionName("potion.waterwalk");
 		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("minecraft","textures/items/feather.png"), false, 0)).setPotionName("potion.slowfall");
 	 
-	}/*
-
-	private static void initPotionTypesReflection() 
-	{
-		//because it is final, and because forge does not natively do this, we must change it this way
-		Potion[] potionTypes = null;  //  public static final Potion[] potionTypes = new Potion[32];
-	    for (Field f : Potion.class.getDeclaredFields()) 
-	    {
-	        f.setAccessible(true);
-	        try 
-	        { 
-	            if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) 
-	            {
-	                Field modfield = Field.class.getDeclaredField("modifiers");
-	                modfield.setAccessible(true);
-	                modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-	                potionTypes = (Potion[])f.get(null);
-	                final Potion[] newPotionTypes = new Potion[256];
-	               
-	                System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-	                f.set(null, newPotionTypes);
-	                
-	            }
-	        }
-	        catch (Exception e) 
-	        {
-	            System.err.println("Severe error, please report this to the mod author:");
-	            System.err.println(e);
-	        }
-	    }
-	}
-	*/
-	
-
-/*
-	public static void tickFrost(LivingUpdateEvent event) 
-	{ 
-		if(event.entityLiving.isPotionActive(PotionRegistry.frost)) 
-	    { 
-			World world = event.entityLiving.worldObj;
-			BlockPos pos = event.entityLiving.getPosition();
-
-			if(world.rand.nextDouble() < 0.5)
-				doPotionParticle(world,event.entityLiving,EnumParticleTypes.SNOWBALL);
-
-			if(world.rand.nextDouble() < 0.3 && 
-				//world.getBlockState(pos).getBlock().isReplaceable(world, pos) &&
-				world.getBlockState(pos.down()).getBlock() != Blocks.snow_layer && 
-				//world.getBlockState(pos).getBlock().isReplaceable(world, pos.down()) == false &&//dont place above torches/snow/grass
-				
-				world.isAirBlock(pos.down()) == false)//dont place above air
-			{
-				world.setBlockState( pos, Blocks.snow_layer.getDefaultState());
-			}
-	    } 
-	}*/
-	
-/*
-	public static void tickLavawalk(LivingUpdateEvent event) 
-	{
-		if(event.entityLiving.isPotionActive(PotionRegistry.lavawalk)) 
-	    {
-			tickLiquidWalk(event,Blocks.lava);
-	    }
-	}*/
-
+	} 
+ 
 	public static void tickWaterwalk(LivingUpdateEvent event) 
 	{
 		if(event.entityLiving.isPotionActive(PotionRegistry.waterwalk)) 

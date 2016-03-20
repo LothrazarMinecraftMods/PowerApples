@@ -40,6 +40,9 @@ public class ItemRegistry
 	public static boolean apple_netherwart_expensive; 
 	public static boolean apple_prismarine_expensive;
 	public static boolean apple_clownfish_expensive;
+
+	public static boolean apple_chorus_expensive; 
+	public static boolean apple_chorus_enabled; 
 	
 	public static ItemFoodAppleMagic apple_emerald;
 	public static ItemFoodAppleMagic apple_diamond; 
@@ -50,6 +53,7 @@ public class ItemRegistry
 	public static ItemFoodAppleMagic apple_netherwart; 
 	public static ItemFoodAppleMagic apple_prismarine;
 	public static ItemFoodAppleMagic apple_slowfall;
+	public static ItemFoodAppleMagic apple_chorus;
 	
 	private static final int clownfish = 2;
 
@@ -58,7 +62,16 @@ public class ItemRegistry
 
 	public static void registerItems()
 	{   
-		if(apple_ender_enabled)
+		if(apple_chorus_enabled){
+			ItemRegistry.apple_chorus = new ItemFoodAppleMagic(hunger, false);
+			 
+			ItemRegistry.apple_chorus.addEffect(PotionRegistry.getPotionID(MobEffects.levitation), 60, I);
+			ItemRegistry.registerItem(ItemRegistry.apple_chorus, "apple_chorus");
+	
+			ItemFoodAppleMagic.addRecipe(ItemRegistry.apple_chorus,new ItemStack(Items.chorus_fruit),apple_chorus_expensive);
+		}
+		
+		if(apple_chorus_enabled)
 		{
 			ItemRegistry.apple_ender = new ItemFoodAppleMagic(hunger, false);
 		 

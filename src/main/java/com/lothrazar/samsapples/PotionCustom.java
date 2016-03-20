@@ -1,6 +1,5 @@
 package com.lothrazar.samsapples;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -16,20 +15,12 @@ public class PotionCustom extends Potion
 		location = loc;
 		Potion.potionRegistry.register(potionID, location, this);
 	} 
-	/*
-	@Override
-	public Potion setIconIndex(int par1, int par2) 
-    {
-        super.setIconIndex(par1, par2);
-        return this;
-    }
-	*/
+
     @SideOnly(Side.CLIENT)
     public boolean hasStatusIcon()
     {
         return true;//false to block it from looking for one of the vanilla textures in the default way.
     }
-    
     
 	@Override
     @SideOnly(Side.CLIENT)
@@ -39,5 +30,4 @@ public class PotionCustom extends Potion
 		
 		super.renderInventoryEffect(x, y, effect, mc);
 	}
-	
 }
