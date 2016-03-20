@@ -46,7 +46,7 @@ public class PotionRegistry
 	
 	public static void registerPotionEffects()
 	{ 
-		initPotionTypesReflection();
+		//initPotionTypesReflection();
 	     
 	    registerNewPotionEffects(); 
 	}
@@ -55,13 +55,13 @@ public class PotionRegistry
 	{  
 		//http://www.minecraftforge.net/forum/index.php?topic=11024.0
 		//???http://www.minecraftforge.net/forum/index.php?topic=12358.0
-		//
-		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("ender"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
-		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("nav"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
-		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("waterwalk") , false, 0, new ItemStack(Items.prismarine_shard))).setPotionName("potion.waterwalk");
+		//resource locations still dont work >< TODO: use them intead of itemstack override
+		PotionRegistry.ender = (new PotionCustom(ender_id, new ResourceLocation("textures/items/ender_pearl"), false, 0, new ItemStack(Items.ender_pearl))).setPotionName("potion.ender");	  
+		PotionRegistry.nav = (new PotionCustom(nav_id, new ResourceLocation("feather"), false, 0, new ItemStack(Items.map))).setPotionName("potion.nav");	  
+		PotionRegistry.waterwalk = (new PotionCustom(waterwalk_id, new ResourceLocation("prismarineShard") , false, 0, new ItemStack(Items.prismarine_shard))).setPotionName("potion.waterwalk");
 		PotionRegistry.slowfall = (new PotionCustom(slowfall_id,   new ResourceLocation("slowfall"), false, 0, new ItemStack(Items.feather))).setPotionName("potion.slowfall");
 	 
-	}
+	}/*
 
 	private static void initPotionTypesReflection() 
 	{
@@ -93,7 +93,7 @@ public class PotionRegistry
 	        }
 	    }
 	}
-	
+	*/
 	
 
 /*

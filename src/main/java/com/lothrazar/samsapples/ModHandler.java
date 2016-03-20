@@ -55,7 +55,7 @@ public class ModHandler
 
 			World world = null;
 			 
-			if(player.getServer().worldServers.length > 0)
+			if(player.getServer() != null && player.getServer().worldServers.length > 0)
 			{
 				world = player.getServer().getEntityWorld();
 			}

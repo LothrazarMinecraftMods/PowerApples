@@ -11,7 +11,7 @@ public class PotionCustom extends Potion
 { 
 	protected PotionCustom(int potionID, ResourceLocation location,	boolean badEffect, int potionColor,ItemStack is) 
 	{
-		super(false,12624973); 
+		super(false,potionColor); 
 		icon = is;
 		Potion.potionRegistry.register(potionID, location, this);
 	}
@@ -36,5 +36,8 @@ public class PotionCustom extends Potion
 	{
 		if(icon != null)
 			UtilItemRenderer.renderItemAt(icon,x+6,y+6, 16);
+		
+		super.renderInventoryEffect(x, y, effect, mc);
 	}
+	
 }
