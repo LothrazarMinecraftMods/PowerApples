@@ -5,8 +5,9 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -38,8 +39,8 @@ public class ModHandler
 	public void onRenderTextOverlay(RenderGameOverlayEvent.Text event)
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;  
-	
-		if(player.isPotionActive(PotionRegistry.nav_id) && 
+ 
+		if(player.isPotionActive(PotionRegistry.nav) && 
 				Minecraft.getMinecraft().gameSettings.showDebugInfo == false && 
 				player.worldObj.isRemote == true)//client side only
 		{
@@ -53,10 +54,10 @@ public class ModHandler
 			UtilItemRenderer.renderItemAt(new ItemStack(Items.compass),xRight,yBottom,size);
 
 			World world = null;
-		
-			if(MinecraftServer.getServer().worldServers.length > 0)
+			 
+			if(player.getServer().worldServers.length > 0)
 			{
-				world = MinecraftServer.getServer().getEntityWorld();
+				world = player.getServer().getEntityWorld();
 			}
 			else System.out.println("worldServers do not exist");
 			
@@ -69,16 +70,16 @@ public class ModHandler
 	
 	@SubscribeEvent
 	public void entityInteractEvent(EntityInteractEvent event)
-    {
-		if(event.target == null || event.entityPlayer == null){return;}//dont think this ever happens
+    { 
+		if(event.getTarget() == null || event.entityPlayer == null){return;}//dont think this ever happens
 		
-		if(event.entityPlayer.getHeldItem() != null && 
-				event.entityPlayer.getHeldItem().getItem() instanceof ItemFoodAppleMagic
-				&& event.target instanceof EntityLivingBase)
+		if(event.entityPlayer.getHeldItemMainhand() != null && 
+				event.entityPlayer.getHeldItemMainhand().getItem() instanceof ItemFoodAppleMagic
+				&& event.getTarget() instanceof EntityLivingBase)
 		{
-			ItemFoodAppleMagic item = (ItemFoodAppleMagic)event.entityPlayer.getHeldItem().getItem();
+			ItemFoodAppleMagic item = (ItemFoodAppleMagic)event.entityPlayer.getHeldItemMainhand().getItem();
 			
-			EntityLivingBase mob = (EntityLivingBase)event.target;
+			EntityLivingBase mob = (EntityLivingBase)event.getTarget();
 			
 			item.addAllEffects(event.entity.worldObj, mob);
 		
@@ -87,9 +88,12 @@ public class ModHandler
 				event.entityPlayer.inventory.decrStackSize(event.entityPlayer.inventory.currentItem, 1);
 	        }
 	 
-			event.entityPlayer.worldObj.playSoundAtEntity(mob, "random.eat", 1.0F, 1.0F);
+			event.entityPlayer.worldObj.playSound(
+					mob.getPosition().getX(),mob.getPosition().getY(),mob.getPosition().getZ()
+					, SoundEvents.entity_horse_eat,SoundCategory.PLAYERS, 1.0F, 1.0F,false);
 			//event.entityLiving .setea
-			mob.setEating(true); //makes horse animate and bend down to eat
+			 
+			//mob.setEating(true); //makes horse animate and bend down to eat
 		}
     }
 	

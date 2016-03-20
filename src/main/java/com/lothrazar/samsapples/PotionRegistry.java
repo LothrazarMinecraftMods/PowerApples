@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -35,7 +36,13 @@ public class PotionRegistry
 //	public static int frost_id = 55;
 	
 	public static float slowfallSpeed = 0.41f;
-
+	
+	public static int getPotionID(PotionEffect pot){
+		return Potion.potionRegistry.getIDForObject(pot.getPotion());
+	}
+	public static int getPotionID(Potion pot){
+		return Potion.potionRegistry.getIDForObject(pot);
+	}
 	
 	public static void registerPotionEffects()
 	{ 
