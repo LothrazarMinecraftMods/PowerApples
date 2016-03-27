@@ -1,6 +1,7 @@
 package com.lothrazar.samsapples;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
@@ -51,42 +52,42 @@ public class PotionRegistry
 	 
 	} 
  
-	public static void tickWaterwalk(LivingUpdateEvent event) 
+	public static void tickWaterwalk(EntityLivingBase entityLiving) 
 	{
-		if(event.entityLiving.isPotionActive(PotionRegistry.waterwalk)) 
+		if(entityLiving.isPotionActive(PotionRegistry.waterwalk)) 
 	    {
-			tickLiquidWalk(event,Blocks.water);
+			tickLiquidWalk(entityLiving,Blocks.water);
 	    }
 	}
  
-	private static void tickLiquidWalk(LivingUpdateEvent event, Block liquid)
+	private static void tickLiquidWalk(EntityLivingBase entityLiving, Block liquid)
 	{
-    	 World world = event.entityLiving.worldObj;
+    	 World world = entityLiving.worldObj;
     	 
-    	 if(world.getBlockState(event.entityLiving.getPosition().down()).getBlock() == liquid && 
-    			 world.isAirBlock(event.entityLiving.getPosition()) && 
-    			 event.entityLiving.motionY < 0)
+    	 if(world.getBlockState(entityLiving.getPosition().down()).getBlock() == liquid && 
+    			 world.isAirBlock(entityLiving.getPosition()) && 
+    			 entityLiving.motionY < 0)
     	 { 
-    		 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel it
+    		 if(entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel it
     		 {
-    			 EntityPlayer p = (EntityPlayer)event.entityLiving;
+    			 EntityPlayer p = (EntityPlayer)entityLiving;
     			 if(p.isSneaking())
     				 return;//let them slip down into it
     		 }
     		 
-    		 event.entityLiving.motionY  = 0;//stop falling
-    		 event.entityLiving.onGround = true; //act as if on solid ground
-    		 event.entityLiving.setAIMoveSpeed(0.1F);//walking and not sprinting is this speed
+    		 entityLiving.motionY  = 0;//stop falling
+    		 entityLiving.onGround = true; //act as if on solid ground
+    		 entityLiving.setAIMoveSpeed(0.1F);//walking and not sprinting is this speed
     	 }  
 	}
 	
-	public static void tickSlowfall(LivingUpdateEvent event) 
+	public static void tickSlowfall(EntityLivingBase entityLiving) 
 	{
-		 if(event.entityLiving.isPotionActive(PotionRegistry.slowfall)) 
+		 if(entityLiving.isPotionActive(PotionRegistry.slowfall)) 
 	     { 
-			 if(event.entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel
+			 if(entityLiving instanceof EntityPlayer)  //now wait here, since if we are a sneaking player we cancel
 			 {
-    			 EntityPlayer p = (EntityPlayer)event.entityLiving;
+    			 EntityPlayer p = (EntityPlayer)entityLiving;
     			 if(p.isSneaking())
     			 {
     				 return;//so fall normally for now
@@ -95,11 +96,11 @@ public class PotionRegistry
 			 //else: so we are either a non-sneaking player, or a non player entity
 			  
 	    	 //a normal fall seems to go up to 0, -1.2, -1.4, -1.6, then flattens out at -0.078 
-	    	 if(event.entityLiving.motionY < 0)
+	    	 if(entityLiving.motionY < 0)
 	    	 { 
-				event.entityLiving.motionY *= slowfallSpeed;
+				entityLiving.motionY *= slowfallSpeed;
 				  
-				event.entityLiving.fallDistance = 0f; //for no fall damage
+				entityLiving.fallDistance = 0f; //for no fall damage
 	    	 } 
 	     }
 	}	 

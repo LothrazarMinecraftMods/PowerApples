@@ -19,7 +19,7 @@ public class PotionCustom extends Potion
     @SideOnly(Side.CLIENT)
     public boolean hasStatusIcon()
     {
-        return true;//false to block it from looking for one of the vanilla textures in the default way.
+        return false;//whether or not to render in the top right.
     }
     
 	@Override

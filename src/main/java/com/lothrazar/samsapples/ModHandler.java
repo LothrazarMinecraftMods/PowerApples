@@ -2,6 +2,7 @@ package com.lothrazar.samsapples;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -16,14 +17,20 @@ public class ModHandler{
 	@SubscribeEvent
 	public void onEnderTeleportEvent(EnderTeleportEvent event){
 
-		if(event.entityLiving != null && event.entityLiving.isPotionActive(PotionRegistry.ender)){
-			event.attackDamage = 0; // starts at exactly 5.0 which is 2.5hearts
-
-			if(event.entityLiving.worldObj.isRemote == false)// do not spawn a second 'ghost' one
-																// on client side
+		if(event.getEntity() instanceof EntityLivingBase == false){
+			return;
+		}
+		EntityLivingBase entityLiving = (EntityLivingBase)event.getEntity();
+		if(entityLiving != null && entityLiving.isPotionActive(PotionRegistry.ender)){
+			event.setAttackDamage(0); // starts at exactly 5.0 which is 2.5hearts
+	
+			// do not spawn a second 'ghost' one on client side
+			if(entityLiving.worldObj.isRemote == false)
 			{
-				EntityItem entityItem = new EntityItem(event.entityLiving.worldObj, event.targetX, event.targetY, event.targetZ, new ItemStack(Items.ender_pearl));
-				event.entityLiving.worldObj.spawnEntityInWorld(entityItem);
+				EntityItem entityItem = new EntityItem(entityLiving.worldObj, 
+						event.getTargetX(), event.getTargetY(), event.getTargetZ(), 
+						new ItemStack(Items.ender_pearl));
+				entityLiving.worldObj.spawnEntityInWorld(entityItem);
 			}
 		}
 	}
@@ -31,22 +38,26 @@ public class ModHandler{
 	@SubscribeEvent
 	public void entityInteractEvent(EntityInteractEvent event){
 
-		if(event.getTarget() == null || event.entityPlayer == null){
+		if(event.getEntity() instanceof EntityPlayer == false){
+			return;
+		}
+		EntityPlayer entityPlayer = (EntityPlayer)event.getEntity();
+		if(event.getTarget() == null || entityPlayer == null){
 			return;
 		}// dont think this ever happens
 
-		if(event.entityPlayer.getHeldItemMainhand() != null && event.entityPlayer.getHeldItemMainhand().getItem() instanceof ItemFoodAppleMagic && event.getTarget() instanceof EntityLivingBase){
-			ItemFoodAppleMagic item = (ItemFoodAppleMagic) event.entityPlayer.getHeldItemMainhand().getItem();
+		if(entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof ItemFoodAppleMagic && event.getTarget() instanceof EntityLivingBase){
+			ItemFoodAppleMagic item = (ItemFoodAppleMagic) entityPlayer.getHeldItemMainhand().getItem();
 
 			EntityLivingBase mob = (EntityLivingBase) event.getTarget();
 
-			item.addAllEffects(event.entity.worldObj, mob);
+			item.addAllEffects(entityPlayer.worldObj, mob);
 
-			if(event.entityPlayer.capabilities.isCreativeMode == false){
-				event.entityPlayer.inventory.decrStackSize(event.entityPlayer.inventory.currentItem, 1);
+			if(entityPlayer.capabilities.isCreativeMode == false){
+				entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
 			}
 
-			event.entityPlayer.worldObj.playSound(mob.getPosition().getX(), mob.getPosition().getY(), mob.getPosition().getZ(), SoundEvents.entity_horse_eat, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+			entityPlayer.worldObj.playSound(mob.getPosition().getX(), mob.getPosition().getY(), mob.getPosition().getZ(), SoundEvents.entity_horse_eat, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
 			// event.entityLiving .setea
 
 			// mob.setEating(true); //makes horse animate and bend down to eat
@@ -56,12 +67,12 @@ public class ModHandler{
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event){
 
-		if(event.entityLiving == null){
+		if(event.getEntity() instanceof EntityLivingBase == false){
 			return;
 		}
 
-		PotionRegistry.tickSlowfall(event);
+		PotionRegistry.tickSlowfall((EntityLivingBase)event.getEntity());
 
-		PotionRegistry.tickWaterwalk(event);
+		PotionRegistry.tickWaterwalk((EntityLivingBase)event.getEntity());
 	}
 }
