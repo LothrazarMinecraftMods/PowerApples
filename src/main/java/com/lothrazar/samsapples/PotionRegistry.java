@@ -27,14 +27,7 @@ public class PotionRegistry
 	public static int slowfall_id = 53; 
 	
 	public static float slowfallSpeed = 0.41f;
-	
-	public static int getPotionID(PotionEffect pot){
-		return Potion.potionRegistry.getIDForObject(pot.getPotion());
-	}
-	public static int getPotionID(Potion pot){
-		return Potion.potionRegistry.getIDForObject(pot);
-	}
-	
+
 	public static void registerPotionEffects()
 	{ 
 	    registerNewPotionEffects(); 
@@ -56,7 +49,7 @@ public class PotionRegistry
 	{
 		if(entityLiving.isPotionActive(PotionRegistry.waterwalk)) 
 	    {
-			tickLiquidWalk(entityLiving,Blocks.water);
+			tickLiquidWalk(entityLiving,Blocks.WATER);
 	    }
 	}
  

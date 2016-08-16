@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class ItemFoodAppleMagic extends ItemFood
 {  
 	private boolean hasEffect = false;
-	private ArrayList<Integer> potionIds;
+	private ArrayList<Potion> potionIds;
 	private ArrayList<Integer> potionDurations;
 	private ArrayList<Integer> potionAmplifiers;
 
@@ -31,12 +31,12 @@ public class ItemFoodAppleMagic extends ItemFood
  
 		this.setAlwaysEdible(); //can eat even if full hunger
 		this.setCreativeTab(ModApples.tabSamsContent);
-		potionIds = new ArrayList<Integer>();
+		potionIds = new ArrayList<Potion>();
 		potionDurations = new ArrayList<Integer>();
 		potionAmplifiers = new ArrayList<Integer>();
 	}
 	 
-	public ItemFoodAppleMagic addEffect(int potionId,int potionDuration,int potionAmplifier)
+	public ItemFoodAppleMagic addEffect(Potion potionId,int potionDuration,int potionAmplifier)
 	{
 		int TICKS_PER_SEC = 20;
 		
@@ -78,13 +78,13 @@ public class ItemFoodAppleMagic extends ItemFood
 			GameRegistry.addRecipe(new ItemStack(apple)
 				,"lll","lal","lll"  
 				,'l', ingredient
-				,'a', Items.apple); 
+				,'a', Items.APPLE); 
 		}
 		else
 		{
 			GameRegistry.addShapelessRecipe(new ItemStack(apple)
 				,ingredient
-				, Items.apple);
+				, Items.APPLE);
 	 
 			refund = 1; 
 		}
@@ -98,7 +98,7 @@ public class ItemFoodAppleMagic extends ItemFood
 		Potion p;
 		for(int i = 0; i < potionIds.size(); i++)  
   		{ 
-  			p = Potion.potionRegistry.getObjectById(potionIds.get(i));//Potion.potionTypes[potionIds.get(i)];
+  			p = potionIds.get(i);//Potion.potionTypes[potionIds.get(i)];
   			 
   			list.add(I18n.translateToLocal(p.getName()));   
   		}   
@@ -110,7 +110,7 @@ public class ItemFoodAppleMagic extends ItemFood
 	  		for(int i = 0; i < potionIds.size(); i++)  
 	  		{ 
 	  			addOrMergePotionEffect(player, new PotionEffect(
-	  					Potion.potionRegistry.getObjectById(potionIds.get(i)) 
+	  					potionIds.get(i)
 	  					,potionDurations.get(i)
 	  					,potionAmplifiers.get(i)));
 	  		}

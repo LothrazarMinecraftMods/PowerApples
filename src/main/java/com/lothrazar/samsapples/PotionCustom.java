@@ -3,6 +3,7 @@ package com.lothrazar.samsapples;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -13,7 +14,8 @@ public class PotionCustom extends Potion
 	{
 		super(false,potionColor); 
 		location = loc;
-		Potion.potionRegistry.register(potionID, location, this);
+//		Potion.potionRegistry.register(potionID, location, this);
+		GameRegistry.register(this, location);
 	} 
 
     @SideOnly(Side.CLIENT)

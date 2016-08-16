@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModHandler{
@@ -29,14 +29,14 @@ public class ModHandler{
 			{
 				EntityItem entityItem = new EntityItem(entityLiving.worldObj, 
 						event.getTargetX(), event.getTargetY(), event.getTargetZ(), 
-						new ItemStack(Items.ender_pearl));
+						new ItemStack(Items.ENDER_PEARL));
 				entityLiving.worldObj.spawnEntityInWorld(entityItem);
 			}
 		}
 	}
  
 	@SubscribeEvent
-	public void entityInteractEvent(EntityInteractEvent event){
+	public void entityInteractEvent(EntityInteract event){
 
 		if(event.getEntity() instanceof EntityPlayer == false){
 			return;
@@ -57,7 +57,8 @@ public class ModHandler{
 				entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
 			}
 
-			entityPlayer.worldObj.playSound(mob.getPosition().getX(), mob.getPosition().getY(), mob.getPosition().getZ(), SoundEvents.entity_horse_eat, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+			entityPlayer.worldObj.playSound(mob.getPosition().getX(), mob.getPosition().getY(), mob.getPosition().getZ(), 
+			    SoundEvents.ENTITY_HORSE_EAT, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
 			// event.entityLiving .setea
 
 			// mob.setEating(true); //makes horse animate and bend down to eat
