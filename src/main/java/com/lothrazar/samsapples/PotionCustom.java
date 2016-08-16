@@ -32,4 +32,11 @@ public class PotionCustom extends Potion
 		
 		super.renderInventoryEffect(x, y, effect, mc);
 	}
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void renderHUDEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc, float alpha) {
+    if (mc.gameSettings.showDebugInfo == false)//dont texture on top of the debug text
+      UtilItemRenderer.renderItemAt(location, x + 4, y + 3);
+  }
 }
